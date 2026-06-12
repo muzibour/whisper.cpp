@@ -68,3 +68,4 @@ local.properties
 
 # AGENTS
 .pi/SYSTEM.md
+*.class
