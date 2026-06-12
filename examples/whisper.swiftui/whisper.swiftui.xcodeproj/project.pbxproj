@@ -15,12 +15,27 @@
 		0AAC5D9B29539CCF003032C3 /* WhisperCppDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5D9A29539CCF003032C3 /* WhisperCppDemoApp.swift */; };
 		0AAC5D9D29539CCF003032C3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5D9C29539CCF003032C3 /* ContentView.swift */; };
 		0AAC5D9F29539CD0003032C3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AAC5D9E29539CD0003032C3 /* Assets.xcassets */; };
-		0AAC5DA329539CD0003032C3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AAC5DA229539CD0003032C3 /* Preview Assets.xcassets */; };
-		0AAC5DCB29539EB1003032C3 /* whisper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5DC729539EB0003032C3 /* whisper.cpp */; settings = {COMPILER_FLAGS = "-Wno-shorten-64-to-32"; }; };
-		0AAC5DCC29539EB1003032C3 /* ggml.c in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5DC929539EB0003032C3 /* ggml.c */; settings = {COMPILER_FLAGS = "-DGGML_USE_ACCELERATE -Wno-shorten-64-to-32"; }; };
 		0AAC5DCE2953A05C003032C3 /* WhisperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5DCD2953A05C003032C3 /* WhisperState.swift */; };
 		0AAC5DD12953A394003032C3 /* LibWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AAC5DD02953A394003032C3 /* LibWhisper.swift */; };
+		5B3454FF2D8178F80005A3BC /* whisper.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B3454FE2D8178F80005A3BC /* whisper.xcframework */; };
+		5B3455002D8178F80005A3BC /* whisper.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B3454FE2D8178F80005A3BC /* whisper.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7F79E0EE2CE0A78000ACD7BF /* DownloadButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79E0ED2CE0A78000ACD7BF /* DownloadButton.swift */; };
+		7F79E0F02CE0C6F700ACD7BF /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F79E0EF2CE0C6F700ACD7BF /* Model.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5B3455012D8178F80005A3BC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5B3455002D8178F80005A3BC /* whisper.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A8E48FF2954B3F100704C1B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -33,14 +48,11 @@
 		0AAC5D9C29539CCF003032C3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0AAC5D9E29539CD0003032C3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0AAC5DA029539CD0003032C3 /* WhisperCppDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WhisperCppDemo.entitlements; sourceTree = "<group>"; };
-		0AAC5DA229539CD0003032C3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0AAC5DC629539EAF003032C3 /* WhisperCppDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhisperCppDemo-Bridging-Header.h"; sourceTree = "<group>"; };
-		0AAC5DC729539EB0003032C3 /* whisper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = whisper.cpp; sourceTree = "<group>"; };
-		0AAC5DC829539EB0003032C3 /* whisper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = whisper.h; sourceTree = "<group>"; };
-		0AAC5DC929539EB0003032C3 /* ggml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ggml.c; sourceTree = "<group>"; };
-		0AAC5DCA29539EB0003032C3 /* ggml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ggml.h; sourceTree = "<group>"; };
 		0AAC5DCD2953A05C003032C3 /* WhisperState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperState.swift; sourceTree = "<group>"; };
 		0AAC5DD02953A394003032C3 /* LibWhisper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibWhisper.swift; sourceTree = "<group>"; };
+		5B3454FE2D8178F80005A3BC /* whisper.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = whisper.xcframework; path = "../../build-apple/whisper.xcframework"; sourceTree = "<group>"; };
+		7F79E0ED2CE0A78000ACD7BF /* DownloadButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadButton.swift; sourceTree = "<group>"; };
+		7F79E0EF2CE0C6F700ACD7BF /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B3454FF2D8178F80005A3BC /* whisper.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				0AAC5DCD2953A05C003032C3 /* WhisperState.swift */,
+				7F79E0EF2CE0C6F700ACD7BF /* Model.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -84,10 +98,10 @@
 			isa = PBXGroup;
 			children = (
 				0A8E48FF2954B3F100704C1B /* README.md */,
-				0AAC5DC529539E89003032C3 /* whisper.cpp */,
 				0AAC5DCF2953A36C003032C3 /* whisper.cpp.swift */,
 				0AAC5D9929539CCF003032C3 /* whisper.swiftui.demo */,
 				0AAC5D9829539CCF003032C3 /* Products */,
+				E3F92DC32AFA8E3800A6A9D4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,31 +126,9 @@
 			path = whisper.swiftui.demo;
 			sourceTree = "<group>";
 		};
-		0AAC5DA129539CD0003032C3 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				0AAC5DA229539CD0003032C3 /* Preview Assets.xcassets */,
-			);
-			name = "Preview Content";
-			path = "../Preview Content";
-			sourceTree = "<group>";
-		};
-		0AAC5DC529539E89003032C3 /* whisper.cpp */ = {
-			isa = PBXGroup;
-			children = (
-				0AAC5DC929539EB0003032C3 /* ggml.c */,
-				0AAC5DCA29539EB0003032C3 /* ggml.h */,
-				0AAC5DC729539EB0003032C3 /* whisper.cpp */,
-				0AAC5DC829539EB0003032C3 /* whisper.h */,
-			);
-			name = whisper.cpp;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 		0AAC5DCF2953A36C003032C3 /* whisper.cpp.swift */ = {
 			isa = PBXGroup;
 			children = (
-				0AAC5DC629539EAF003032C3 /* WhisperCppDemo-Bridging-Header.h */,
 				0AAC5DD02953A394003032C3 /* LibWhisper.swift */,
 			);
 			path = whisper.cpp.swift;
@@ -146,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				0AAC5D9C29539CCF003032C3 /* ContentView.swift */,
+				7F79E0ED2CE0A78000ACD7BF /* DownloadButton.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -155,9 +148,16 @@
 			children = (
 				0AAC5D9E29539CD0003032C3 /* Assets.xcassets */,
 				0AAC5DA029539CD0003032C3 /* WhisperCppDemo.entitlements */,
-				0AAC5DA129539CD0003032C3 /* Preview Content */,
 			);
 			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		E3F92DC32AFA8E3800A6A9D4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B3454FE2D8178F80005A3BC /* whisper.xcframework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,12 +170,15 @@
 				0AAC5D9329539CCF003032C3 /* Sources */,
 				0AAC5D9429539CCF003032C3 /* Frameworks */,
 				0AAC5D9529539CCF003032C3 /* Resources */,
+				5B3455012D8178F80005A3BC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = whisper.swiftui;
+			packageProductDependencies = (
+			);
 			productName = WhisperCppDemo;
 			productReference = 0AAC5D9729539CCF003032C3 /* whisper.swiftui.app */;
 			productType = "com.apple.product-type.application";
@@ -220,7 +223,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA751482953AC2E001EE061 /* samples in Resources */,
-				0AAC5DA329539CD0003032C3 /* Preview Assets.xcassets in Resources */,
 				0A8E49002954B3F100704C1B /* README.md in Resources */,
 				0AA751492953AC2E001EE061 /* models in Resources */,
 				0AAC5D9F29539CD0003032C3 /* Assets.xcassets in Resources */,
@@ -236,12 +238,12 @@
 			files = (
 				0AAC5D9D29539CCF003032C3 /* ContentView.swift in Sources */,
 				0AAC5D9B29539CCF003032C3 /* WhisperCppDemoApp.swift in Sources */,
-				0AAC5DCC29539EB1003032C3 /* ggml.c in Sources */,
 				0AAC5DCE2953A05C003032C3 /* WhisperState.swift in Sources */,
 				0AAC5DD12953A394003032C3 /* LibWhisper.swift in Sources */,
 				0AA7514C2953B569001EE061 /* RiffWaveUtils.swift in Sources */,
-				0AAC5DCB29539EB1003032C3 /* whisper.cpp in Sources */,
+				7F79E0EE2CE0A78000ACD7BF /* DownloadButton.swift in Sources */,
 				0AA7514E2953D958001EE061 /* Recorder.swift in Sources */,
+				7F79E0F02CE0C6F700ACD7BF /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"whisper.swiftui.demo/Supporting files/Preview Content\"";
-				DEVELOPMENT_TEAM = 3TZ9BM962G;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -391,9 +393,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.whispercppdemo.WhisperCppDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "whisper.cpp.swift/WhisperCppDemo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -410,7 +413,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"whisper.swiftui.demo/Supporting files/Preview Content\"";
-				DEVELOPMENT_TEAM = 3TZ9BM962G;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -430,12 +433,17 @@
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = (
+					"-O3",
+					"-DNDEBUG",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.whispercppdemo.WhisperCppDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "whisper.cpp.swift/WhisperCppDemo-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

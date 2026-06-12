@@ -3,7 +3,7 @@
 # Usage:
 #
 #   git clone https://github.com/openai/whisper
-#   git clone https://github.com/ggerganov/whisper.cpp
+#   git clone https://github.com/ggml-org/whisper.cpp
 #   git clone https://huggingface.co/openai/whisper-medium
 #
 #   python3 ./whisper.cpp/models/convert-h5-to-ggml.py ./whisper-medium/ ./whisper .
@@ -12,7 +12,7 @@
 #
 # For more info:
 #
-#   https://github.com/ggerganov/whisper.cpp/issues/157
+#   https://github.com/ggml-org/whisper.cpp/issues/157
 #
 
 import io
@@ -23,6 +23,7 @@ import json
 import code
 import torch
 import numpy as np
+from pathlib import Path
 
 from transformers import WhisperForConditionalGeneration
 
@@ -75,17 +76,24 @@ if len(sys.argv) < 4:
     print("Usage: convert-h5-to-ggml.py dir_model path-to-whisper-repo dir-output [use-f32]\n")
     sys.exit(1)
 
-dir_model   = sys.argv[1]
-dir_whisper = sys.argv[2]
-dir_out     = sys.argv[3]
+dir_model   = Path(sys.argv[1])
+dir_whisper = Path(sys.argv[2])
+dir_out     = Path(sys.argv[3])
 
-with open(dir_model + "/vocab.json", "r") as f:
-    encoder = json.load(f)
-with open(dir_model + "/added_tokens.json", "r") as f:
-    encoder_added = json.load(f)
-with open(dir_model + "/config.json", "r") as f:
-    hparams = json.load(f)
+encoder = json.load((dir_model / "vocab.json").open("r", encoding="utf8"))
+encoder_added = json.load((dir_model / "added_tokens.json").open( "r", encoding="utf8"))
+hparams = json.load((dir_model / "config.json").open("r", encoding="utf8"))
 
+# Add this block to handle missing 'max_length'
+if "max_length" not in hparams or hparams["max_length"] is None:
+    hparams["max_length"] = hparams.get("max_target_positions", 448)  # Default to 448 if missing
+elif not isinstance(hparams["max_length"], int):
+    try:
+        hparams["max_length"] = int(hparams["max_length"])  # Convert if necessary
+    except ValueError:
+        print(f"Warning: Invalid max_length value '{hparams['max_length']}', using default 448.")
+        hparams["max_length"] = 448
+        
 model = WhisperForConditionalGeneration.from_pretrained(dir_model)
 
 #code.interact(local=locals())
@@ -96,16 +104,15 @@ with np.load(os.path.join(dir_whisper, "whisper/assets", "mel_filters.npz")) as 
 
 dir_tokenizer = dir_model
 
-fname_out = dir_out + "/ggml-model.bin"
+fname_out = dir_out / "ggml-model.bin"
 
-with open(dir_tokenizer + "/vocab.json", "r", encoding="utf8") as f:
-    tokens = json.load(f)
+tokens = json.load(open(dir_tokenizer / "vocab.json", "r", encoding="utf8"))
 
 # use 16-bit or 32-bit floats
 use_f16 = True
 if len(sys.argv) > 4:
     use_f16 = False
-    fname_out = dir_out + "/ggml-model-f32.bin"
+    fname_out = dir_out / "ggml-model-f32.bin"
 
 fout = open(fname_out, "wb")
 
@@ -171,10 +178,9 @@ for name in list_vars.keys():
     data = data.astype(np.float16)
 
     # reshape conv bias from [n] to [n, 1]
-    if name == "encoder.conv1.bias" or \
-       name == "encoder.conv2.bias":
+    if name in ["encoder.conv1.bias", "encoder.conv2.bias"]:
         data = data.reshape(data.shape[0], 1)
-        print("  Reshaped variable: " + name + " to shape: ", data.shape)
+        print("  Reshaped variable: " , name , " to shape: ", data.shape)
 
     n_dims = len(data.shape)
     print(name, n_dims, data.shape)
@@ -182,7 +188,7 @@ for name in list_vars.keys():
     # looks like the whisper models are in f16 by default
     # so we need to convert the small tensors to f32 until we fully support f16 in ggml
     # ftype == 0 -> float32, ftype == 1 -> float16
-    ftype = 1;
+    ftype = 1
     if use_f16:
         if n_dims < 2 or \
                 name == "encoder.conv1.bias"   or \
@@ -197,16 +203,16 @@ for name in list_vars.keys():
         ftype = 0
 
     # header
-    str = name.encode('utf-8')
-    fout.write(struct.pack("iii", n_dims, len(str), ftype))
+    str_ = name.encode('utf-8')
+    fout.write(struct.pack("iii", n_dims, len(str_), ftype))
     for i in range(n_dims):
         fout.write(struct.pack("i", data.shape[n_dims - 1 - i]))
-    fout.write(str);
+    fout.write(str_)
 
     # data
     data.tofile(fout)
 
 fout.close()
 
-print("Done. Output file: " + fname_out)
+print("Done. Output file: " , fname_out)
 print("")

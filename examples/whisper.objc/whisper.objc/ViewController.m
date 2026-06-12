@@ -6,8 +6,8 @@
 //
 
 #import "ViewController.h"
+#import <whisper/whisper.h>
 
-#import "whisper.h"
 
 #define NUM_BYTES_PER_BUFFER 16*1024
 
@@ -61,7 +61,13 @@ void AudioInputCallback(void * inUserData,
         NSLog(@"Loading model from %@", modelPath);
 
         // create ggml context
-        stateInp.ctx = whisper_init_from_file([modelPath UTF8String]);
+
+        struct whisper_context_params cparams = whisper_context_default_params();
+#if TARGET_OS_SIMULATOR
+        cparams.use_gpu = false;
+        NSLog(@"Running on simulator, using CPU");
+#endif
+        stateInp.ctx = whisper_init_from_file_with_params([modelPath UTF8String], cparams);
 
         // check if the model was loaded successfully
         if (stateInp.ctx == NULL) {
@@ -77,6 +83,19 @@ void AudioInputCallback(void * inUserData,
         stateInp.n_samples = 0;
         stateInp.audioBufferI16 = malloc(MAX_AUDIO_SEC*SAMPLE_RATE*sizeof(int16_t));
         stateInp.audioBufferF32 = malloc(MAX_AUDIO_SEC*SAMPLE_RATE*sizeof(float));
+        // Set up audio session
+        NSError *error = nil;
+
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord error:&error];
+        if (error) {
+            NSLog(@"Error setting audio session category: %@", error);
+        }
+
+        [[AVAudioSession sharedInstance] setActive:YES error:&error];
+        if (error) {
+            NSLog(@"Error activating audio session: %@", error);
+        }
+
     }
 
     stateInp.isTranscribing = false;
@@ -200,6 +219,7 @@ void AudioInputCallback(void * inUserData,
         params.offset_ms        = 0;
         params.no_context       = true;
         params.single_segment   = self->stateInp.isRealtime;
+        params.no_timestamps    = params.single_segment;
 
         CFTimeInterval startTime = CACurrentMediaTime();
 
